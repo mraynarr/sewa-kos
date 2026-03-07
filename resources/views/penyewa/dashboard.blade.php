@@ -1,42 +1,58 @@
-@extends('layouts.app')
+@extends('penyewa.layouts.app')
 
 @section('content')
-    @include('components.hero')
-
-    {{-- @include('components.promo-carousel') --}}
+    @include('penyewa.layouts.hero')
 
     <section id="daftar-kamar" class="py-16 max-w-7xl mx-auto px-4 sm:px-6">
 
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
             <div class="max-w-2xl text-left">
-                <h2 class="text-3xl md:text-4xl font-black text-secondary tracking-tight mb-3">
-                    Rekomendasi <span class="text-primary underline decoration-blue-100 underline-offset-8">Terbaik</span> Untukmu
+                <h2 class="text-3xl md:text-4xl font-black text-primary tracking-tighter mb-3">
+                    Rekomendasi Terbaik Untukmu<span class="text-primary/20">.</span>
                 </h2>
-                <p class="text-base md:text-lg text-surface0 font-medium">
+                <p class="text-base md:text-lg text-slate-500 font-medium">
                     Berdasarkan fasilitas terlengkap dan lokasi paling strategis dekat kampus UPN.
                 </p>
             </div>
 
-            <div class="flex gap-2 w-full md:w-auto">
-                <button class="flex-1 md:flex-none px-4 py-2.5 bg-white border border-gray-100 rounded-xl font-bold text-secondary shadow-sm hover:shadow-md transition-all active:scale-95 text-sm md:text-md flex items-center gap-2">
-                    <i class="fas fa-star text-yellow-400 text-lg"></i> Rating
+            <div class="flex gap-3 w-full md:w-auto">
+                <button class="flex-1 md:flex-none px-5 py-3 bg-white border border-slate-200 rounded-2xl font-bold text-primary shadow-sm hover:border-slate-300 hover:shadow-lg transition-all active:scale-95 text-sm flex items-center gap-2">
+                    <i class="fas fa-star text-yellow-500"></i> Rating
                 </button>
-                <button class="flex-1 md:flex-none px-4 py-2.5 bg-white border border-gray-100 rounded-xl font-bold text-secondary shadow-sm hover:shadow-md transition-all active:scale-95 text-sm md:text-md flex items-center gap-2">
-                    <i class="fas fa-fire text-orange-500 text-lg"></i> Terbaru
+                <button class="flex-1 md:flex-none px-5 py-3 bg-white border border-slate-200 rounded-2xl font-bold text-primary shadow-sm hover:border-slate-300 hover:shadow-lg transition-all active:scale-95 text-sm flex items-center gap-2">
+                    <i class="fas fa-fire text-orange-500"></i> Terbaru
                 </button>
             </div>
-
-            
         </div>
 
-        <div class="mb-10">
-            <div class="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
-                @foreach ($categories as $cat)
-                    <a href="#"
-                        class="bg-white border border-gray-200 text-secondary px-6 py-2.5 rounded-xl shadow-sm hover:border-primary hover:text-primary transition min-w-max text-sm font-bold">
-                        {{ $cat->name }}
-                    </a>
-                @endforeach
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6 mb-12">
+            <div class="w-full lg:w-auto overflow-x-auto no-scrollbar">
+                <div class="flex gap-3">
+                    @foreach ($categories as $cat)
+                        <a href="#"
+                            class="bg-white border border-2 border-slate-300/80 text-slate-500 text-black px-7 py-3.5 rounded-2xl shadow-sm hover:border-primary/60 hover:text-primary hover:shadow-xl transition min-w-max text-sm font-bold flex items-center justify-center">
+                            {{ $cat->name }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="w-full lg:w-[500px]">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">
+                        <i class="fas fa-search text-slate-400 group-focus-within:text-primary transition-colors duration-300 text-sm"></i>
+                    </div>
+
+                    <input type="text"
+                        placeholder="Cari fasilitas..."
+                        class="w-full pl-12 pr-36 py-3.5 bg-white border border-slate-300/80 rounded-2xl shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/6 focus:border-primary transition-all duration-300 font-medium text-slate-700 placeholder:text-slate-400 text-sm">
+
+                    <div class="absolute inset-y-1.5 right-1.5 flex items-center">
+                        <button class="h-full w-30 px-8 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary/90 transition-all duration-300">
+                            Cari
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -71,7 +87,7 @@
                         </div>
 
                         <div class="mt-2 mb-4">
-                            <p class="text-[10px] font-black text-surface0 uppercase tracking-widest mb-0.5 text-left">Harga Sewa</p>
+                            <p class="text-xs font-black text-primary/60 text-surface0 uppercase tracking-widest mb-0.5 text-left">Harga Sewa</p>
                             <span class="text-primary font-extrabold text-xl">
                                 Rp {{ number_format($room->price) }}
                             </span>
@@ -79,9 +95,9 @@
                         </div>
 
                         <div class="mt-auto pt-2">
-                            <a href="/rooms/{{ $room->id }}"
-                                class="block text-center bg-primary text-white hover:bg-primary-dark py-2.5 rounded-xl font-black text-sm transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg shadow-blue-100/50">
-                                Lihat Detail
+                            <a href="{{ route('kamar.show', $room->id) }}"
+                            class="block text-center bg-primary text-white hover:bg-primary-dark py-2.5 rounded-xl font-black text-sm transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg shadow-blue-100/50">
+                            Lihat Detail
                             </a>
                         </div>
                     </div>
@@ -100,10 +116,9 @@
                 </a>
             </div>
         @endif
-        </div>
     </section>
 
-    @include('components.about')
+    @include('penyewa.layouts.about')
 
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }

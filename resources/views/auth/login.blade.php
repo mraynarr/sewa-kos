@@ -1,103 +1,136 @@
-@extends('layouts.auth', ['title' => 'Masuk'])
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk | Griya Asri Kos</title>
 
-@section('content')
-<div class="flex min-h-screen">
-    <div class="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden items-center justify-center">
-        <div class="absolute inset-0 bg-black/20 z-10"></div>
-        <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&q=80&w=1200"
-             class="absolute inset-0 w-full h-full object-cover" alt="Interior Kos">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
 
-        <div class="relative z-20 text-white p-12 max-w-lg">
-            <h1 class="text-5xl font-black leading-tight mb-6 italic">Griya Asri Kos.</h1>
-            <p class="text-xl font-medium text-blue-100 italic">"Kenyamanan hunian adalah awal dari setiap prestasi besar mahasiswa."</p>
-            <div class="mt-12 flex items-center gap-4 bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20">
-                <div class="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center text-2xl">⭐</div>
-                <div>
-                    <p class="font-black text-white">Rating 4.9/5.0</p>
-                    <p class="text-xs text-blue-100 font-bold uppercase tracking-widest">Dari 100+ Mahasiswa UPN</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<body class="bg-gray-50 font-sans antialiased">
+    <div class="min-h-screen flex flex-col justify-center">
+        <div class="flex min-h-screen bg-white">
+            <div class="hidden lg:flex lg:w-3/5 bg-primary relative overflow-hidden items-center justify-center">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+                <img src="/images/cover_web/kos3.jpg"
+                    class="absolute inset-0 w-full h-full object-cover object-center scale-105 hover:scale-100 transition-transform duration-700"  alt="Interior Kos">
 
-    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white">
-        <div class="max-w-md w-full">
-            <div class="mb-10 text-center lg:text-left">
-                <a href="/" class="inline-block mb-8 text-primary font-black text-xl lg:hidden">Griya Asri Kos.</a>
-                <h2 class="text-4xl font-black text-secondary tracking-tight mb-3">Selamat Datang!</h2>
-                <p class="text-surface0 font-medium italic italic">Silakan masuk untuk mengelola pesanan kamar Anda.</p>
-            </div>
+                <div class="relative z-20 text-white p-16 max-w-xl">
+                    <h1 class="text-6xl font-black leading-tight mb-6 drop-shadow-2xl">Griya Asri Kos.</h1>
+                    <p class="text-xl text-shadow-slate-700 font-medium text-blue-100 leading-relaxed text-justify drop-shadow-lg">
+                        "Kenyamanan hunian adalah awal dari setiap prestasi besar mahasiswa. Kami hadir untuk memastikan fokus belajar Anda tidak terganggu oleh urusan tempat tinggal."
+                    </p>
 
-            <form action="{{ route('login') }}" method="POST" class="space-y-6">
-                @csrf
-                <div>
-                    <label class="block text-sm font-black uppercase tracking-[0.2em] text-surface0 mb-2 ml-1">Alamat Email</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                        <input type="email" name="email" required
-                               class="w-full pl-11 pr-4 py-4 bg-gray-50 border-2 border-transparent focus:border-primary focus:bg-white rounded-2xl transition-all font-bold outline-none"
-                               placeholder="nama@student.upnjatim.ac.id">
+                    <div class="mt-12 flex items-center gap-5 bg-white/10 backdrop-blur-2xl p-5 rounded-[28px] border border-white/20 shadow-2xl w-fit group hover:bg-white/20 transition-all duration-500">
+                        <div class="w-14 h-14 bg-gradient-to-br from-slate-800 to-primary rounded-2xl flex items-center justify-center text-2xl shadow-lg border border-white/10">
+                            <i class="fas fa-shield-alt text-white/90 drop-shadow-[0_0_8px_rgba(37,99,235,0.3)]"></i>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <p class="font-black text-white text-2xl tracking-tighter">4.9</p>
+                                <div class="flex text-lg text-yellow-500/75 gap-0.5 ms-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-[10px] text-blue-100/70 font-bold tracking-[0.2em] uppercase mt-0.5">Trusted by Many Students</p>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div>
-                    <label class="block text-sm font-black uppercase tracking-[0.2em] text-surface0 mb-2 ml-1">Kata Sandi</label>
-                    <div class="relative" x-data="{ show: false }">
-                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                        <input :type="show ? 'text' : 'password'" name="password" required
-                               class="w-full pl-11 pr-12 py-4 bg-gray-50 border-2 border-transparent focus:border-primary focus:bg-white rounded-2xl transition-all font-bold outline-none"
-                               placeholder="••••••••">
-                        <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-primary">
-                            <i class="fas" :class="show ? 'fa-eye-slash' : 'fa-eye'"></i>
+            <div class="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 bg-gray-50/50">
+                <div class="max-w-md w-full bg-white p-8 md:p-10 rounded-4xl border border-gray-300 shadow-2xl shadow-slate-200/80">
+
+                    <div class="mb-8 text-center">
+                        <h2 class="text-2xl font-bold text-slate-800 tracking-tight mb-2">Masuk</h2>
+                        <p class="text-sm text-slate-500 font-medium">
+                            Belum punya akun?
+                            <a href="/register" class="text-primary font-bold hover:underline ms-0.5">Daftar Sekarang</a>
+                        </p>
+                    </div>
+
+                    @if (session('success'))
+                        <div class="mb-4 p-4 bg-green-50 border border-green-200 text-green-600 rounded-xl text-xs font-bold shadow-sm">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="mb-4 p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-xs font-bold shadow-sm">
+                                @foreach ($errors->all() as $error)
+                                    {{ $error }}
+                                @endforeach
+                        </div>
+                    @endif
+
+                    <form action="{{ route('login') }}" method="POST" class="space-y-5">
+                        @csrf
+
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-500 ml-1">Nomor HP atau Email</label>
+                            <input type="email" name="email" required
+                                class="w-full px-4 py-3.5 bg-white border border-gray-200 focus:border-primary rounded-xl transition-all font-medium text-slate-700 outline-none text-sm placeholder:text-gray-400"
+                                placeholder="example@gmail.com">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between items-center px-1">
+                                <label class="block text-xs font-bold text-slate-500">Kata Sandi</label>
+                                <a href="#" class="text-xs font-bold text-primary hover:underline">Lupa kata sandi?</a>
+                            </div>
+                            <div class="relative" x-data="{ show: false }">
+                                <input :type="show ? 'text' : 'password'" name="password" required
+                                    class="w-full pl-4 pr-12 py-3.5 bg-white border border-gray-200 focus:border-primary rounded-xl transition-all font-medium text-slate-700 outline-none text-sm"
+                                    placeholder="Masukkan kata sandi">
+                                <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-primary transition-colors">
+                                    <i class="fas" :class="show ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                                class="w-full bg-primary text-white py-4 rounded-xl font-bold text-base shadow-lg shadow-blue-100 hover:bg-primary-dark transition-all active:scale-[0.98] mt-2">
+                            Masuk
                         </button>
-                    </div>
+
+                        <div class="pt-6">
+                            <div class="relative flex items-center mb-6">
+                                <div class="flex-grow border-t border-gray-100"></div>
+                                <span class="flex-shrink mx-4 text-gray-300 text-[10px] font-bold uppercase tracking-widest">atau masuk dengan</span>
+                                <div class="flex-grow border-t border-gray-100"></div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-4">
+                                <a href="#" class="flex items-center justify-center py-3 border border-gray-300/70 rounded-xl hover:bg-gray-50 hover:border-primary/70 transition-all group">
+                                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 group-hover:scale-110 transition-transform" alt="Google">
+                                </a>
+                                <a href="#" class="flex items-center justify-center py-3 border border-gray-300/70 rounded-xl hover:bg-gray-50 hover:border-primary/70 transition-all text-[#1877F2] group">
+                                    <i class="fab fa-facebook text-xl group-hover:scale-110 transition-transform"></i>
+                                </a>
+                                <a href="#" class="flex items-center justify-center py-3 border border-gray-300/70 rounded-xl hover:bg-gray-50 hover:border-primary/70 transition-all text-black group">
+                                    <i class="fab fa-apple text-xl group-hover:scale-110 transition-transform"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+
+                    <p class="mt-8 text-center text-[11px] text-slate-400 leading-relaxed">
+                        Dengan masuk, saya menyetujui <br>
+                        <a href="#" class="text-primary font-bold hover:underline">Syarat & Ketentuan</a> serta <a href="#" class="text-primary font-bold hover:underline">Kebijakan Privasi</a>.
+                    </p>
                 </div>
-
-                <div class="flex items-center justify-between">
-                    <label class="flex ms-2 items-center gap-2 cursor-pointer group">
-                        <input type="checkbox" class="w-5 h-5 rounded-lg border-2 border-gray-200 text-primary focus:ring-primary cursor-pointer">
-                        <span class="text-sm font-bold text-surface0 group-hover:text-secondary transition-colors italic italic">Ingat Saya</span>
-                    </label>
-                    <a href="#" class="text-sm font-black text-primary hover:text-primary-dark transition-colors italic italic">Lupa Sandi?</a>
-                </div>
-
-                <button type="submit"
-                        class="w-full bg-primary text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-blue-100 hover:bg-primary-dark hover:-translate-y-1 transition-all active:scale-95">
-                    Masuk Sekarang
-                </button>
-
-                <div class="mt-8">
-                    <div class="relative flex items-center justify-center">
-                        <div class="flex-grow border-t border-gray-200"></div>
-                        <span class="flex-shrink mx-4 text-gray-400 text-sm font-black uppercase tracking-widest">Atau masuk dengan</span>
-                        <div class="flex-grow border-t border-gray-200"></div>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-4 mt-8">
-                        <a href="#" class="flex items-center justify-center py-4 border-2 border-gray-100 rounded-2xl hover:bg-gray-50 hover:border-gray-200 transition-all group shadow-sm">
-                            <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 group-hover:scale-110 transition-transform" alt="Google">
-                        </a>
-
-                        <a href="#" class="flex items-center justify-center py-4 border-2 border-gray-100 rounded-2xl hover:bg-gray-50 hover:border-gray-200 transition-all group shadow-sm text-[#1877F2]">
-                            <i class="fab fa-facebook text-2xl group-hover:scale-110 transition-transform"></i>
-                        </a>
-
-                        <a href="#" class="flex items-center justify-center py-4 border-2 border-gray-100 rounded-2xl hover:bg-gray-50 hover:border-gray-200 transition-all group shadow-sm text-black">
-                            <i class="fab fa-apple text-2xl group-hover:scale-110 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <p class="text-center text-surface0 font-bold text-sm">
-                    Belum punya akun?
-                    <a href="/register" class="text-primary hover:underline ml-1 italic italic">Daftar di sini</a>
-                </p>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-@endsection
+</body>
+</html>

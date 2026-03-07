@@ -1,11 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #2563eb;
-  --color-primary-dark: #1e40af;
-  --color-secondary: #0f172a;
-  --color-secondary-hover: #1e293b;
-  --color-accent: #22c55e;
-  --color-accent-hover: #16a34a;
-  --color-surface: #f9fafb;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* 2. CORE COLORS: Dark Navy Theme */
+  --color-primary: #1E293B;
+  --color-primary-dark: #0F172A;
+  --color-secondary: #334155;
+
+  /* 3. SURFACE COLORS:
+  --color-surface: #F8FAFC;
+  --color-surface0: #64748B;
+
+  /* 4. ACCENT COLORS */
+  --color-accent: #2563EB;
+  --color-rating: #B89150;
+}
+
+.shadow-premium {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
 }

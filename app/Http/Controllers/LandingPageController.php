@@ -2,41 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdditionalService;
-use App\Models\Room;
 use App\Models\RoomType;
-use Illuminate\View\View;
+use App\Models\Room;
+use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
 {
-    public function index(): View
+    public function index()
     {
-        $rooms = Room::with('roomType')
-            ->where('status', 'available')
-            ->inRandomOrder()
-            ->take(8)
-            ->get();
-
         $categories = RoomType::all();
+        $rooms = Room::with('roomType')->latest()->take(8)->get();
 
-        return view('index', compact('rooms', 'categories'));
-    }
-
-    public function show(string $id): View
-    {
-        $room = Room::with('roomType')->findOrFail($id);
-        $services = AdditionalService::all();
-
-        return view('rooms.show', compact('room', 'services'));
-    }
-
-    public function login()
-    {
-        return view('auth.login');
-    }
-
-    public function register()
-    {
-        return view('auth.register');
+        return view('penyewa.dashboard', compact('categories', 'rooms'));
     }
 }

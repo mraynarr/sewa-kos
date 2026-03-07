@@ -1,93 +1,129 @@
-    @extends('layouts.app')
+    @extends('penyewa.layouts.app')
 
     @section('content')
-        <div class="pb-20">
+        <div class="pt-5 pb-20 px-16 bg-slate-100">
 
             <div class="mb-5">
-                <a href="/index" class="text-primary hover:text-blue-800 flex items-center font-medium text-lg">
-                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="{{ route('home') }}#daftar-kamar" class="text-primary hover:text-slate-950 flex items-center font-bold text-lg group transition-all">
+                    <svg class="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
-                    Kembali ke Daftar Kamar
+
+                    <span class="hover:underline underline-offset-8 decoration-2">
+                        Kembali ke Daftar Kamar
+                    </span>
                 </a>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
                 <div class="lg:col-span-2 space-y-8">
-                    <div class="relative rounded-3xl overflow-hidden shadow-lg h-[400px]">
+
+                    <div class="relative rounded-[40px] overflow-hidden shadow-2xl h-[450px] border-8 border-white">
                         <img src="{{ asset('images/room_types/' . $room->roomType->image) }}"
-                            class="w-full h-full object-cover">
-                        <div class="absolute top-4 left-4 flex gap-2">
-                            <span
-                                class="bg-white/90 backdrop-blur px-4 py-1 rounded-full text-primary-dark font-bold text-sm shadow-sm">
+                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+                        <div class="absolute top-6 left-6 flex gap-3">
+                            <span class="bg-white/90 backdrop-blur-md px-5 py-2 rounded-2xl text-primary font-black text-[10px] uppercase tracking-[0.2em] shadow-xl">
                                 {{ $room->roomType->name }}
                             </span>
-                            <span
-                                class="px-6 py-1 {{ $room->gender_type == 'Putra' ? 'bg-primary' : 'bg-pink-500' }} text-white rounded-full font-bold text-sm shadow-sm">
-                                {{ $room->gender_type }}
+                            <span class="px-5 py-2 {{ $room->gender_type == 'Putra' ? 'bg-primary' : 'bg-pink-500' }} text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl">
+                                <i class="fas fa-user-group mr-2"></i>{{ $room->gender_type }}
                             </span>
                         </div>
                     </div>
 
-                    <div class="bg-white py-8 px-8 rounded-3xl border border-gray-100 shadow-sm">
-                        <div class="flex justify-between items-start mb-3">
-                            <h1 class="text-2xl font-extrabold text-secondary">Kamar {{ $room->room_number }}</h1>
-                            <span class="text-yellow-500 font-bold text-xl flex items-center gap-2">
-                                <i class="fas fa-star"></i> {{ $room->rating }}
-                            </span>
+                    <div class="bg-white p-10 rounded-[40px] shadow-sm border border-slate-100">
+                        <div class="flex justify-between items-center mb-6">
+                            <h1 class="text-3xl font-black text-slate-800 tracking-tight italic">Kamar {{ $room->room_number }}</h1>
+                            <div class="flex items-center gap-2 bg-yellow-50 px-4 py-2 rounded-2xl border border-yellow-100">
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <span class="font-black text-yellow-700">{{ $room->rating }}</span>
+                            </div>
                         </div>
-                        <p class="text-gray-600 text-lg leading-relaxed mb-6">{{ $room->roomType->description }}</p>
 
-                        <h3 class="text-xl font-bold text-secondary mb-6">Fasilitas Kamar</h3>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        <p class="text-slate-600 font-semibold leading-relaxed text-md mb-10 italic">
+                            "{{ $room->roomType->description }}"
+                        </p>
+
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-2 h-6 bg-blue-500 rounded-full"></div>
+                            <h3 class="text-xl font-extrabold text-slate-800 tracking-tight">Fasilitas Kamar</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4">
                             @php $facilities = explode(',', $room->facilities); @endphp
                             @foreach ($facilities as $item)
-                                <div class="flex items-center space-x-3 text-gray-700">
-                                    <div
-                                        class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-primary font-bold">
-                                        ✓</div>
-                                    <span class="font-medium">{{ trim($item) }}</span>
+                                <div class="flex items-center gap-3 group">
+                                    <div class="w-6 h-6 bg-blue-50 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:bg-primary">
+                                        <i class="fas fa-check text-[10px] text-primary group-hover:text-white"></i>
+                                    </div>
+                                    <span class="font-bold text-slate-600 text-[15px] tracking-tight group-hover:text-primary transition-colors">
+                                        {{ trim($item) }}
+                                    </span>
                                 </div>
                             @endforeach
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
-                        <h3 class="text-xl font-bold text-secondary mb-6">Spesifikasi Kamar</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="flex items-center p-4 bg-surface rounded-2xl">
-                                <div class="mr-4 text-2xl">📏</div>
+                    <div class="bg-white p-10 rounded-[40px] shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-2 h-6 bg-primary rounded-full"></div>
+                            <h3 class="text-xl font-extrabold text-slate-800 tracking-tight">Spesifikasi Kamar</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <div class="flex items-center gap-4 p-5 bg-white rounded-3xl shadow-lg shadow-slate-100/50 border border-slate-300 group hover:border-primary transition-all duration-300">
+                                <div class="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center text-xl group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                    <i class="fas fa-vector-square"></i>
+                                </div>
                                 <div>
-                                    <p class="text-xs text-surface0 font-bold uppercase">Luas Kamar</p>
-                                    <p class="font-bold text-gray-800">{{ $room->area_size }}</p>
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none mb-1">Luas Kamar</p>
+                                    <p class="text-lg font-black text-slate-800 tracking-tight">{{ $room->area_size }} M²</p>
+                                    <p class="text-[9px] font-medium text-slate-400 italic">(PxL)</p>
                                 </div>
                             </div>
-                            <div class="flex items-center p-4 bg-surface rounded-2xl">
-                                <div class="mr-4 text-2xl">⚡</div>
+
+                            <div class="flex items-center gap-4 p-5 bg-white rounded-3xl shadow-lg shadow-slate-100/50 border border-slate-300 group hover:border-yellow-500 transition-all duration-300">
+                                <div class="w-12 h-12 bg-yellow-50 text-yellow-500 rounded-xl flex items-center justify-center text-xl group-hover:bg-yellow-500 group-hover:text-white transition-colors duration-300">
+                                    <i class="fas fa-bolt-lightning"></i>
+                                </div>
                                 <div>
-                                    <p class="text-xs text-surface0 font-bold uppercase">Listrik</p>
-                                    <p class="font-bold text-gray-800">
-                                        {{ $room->is_electric_included ? 'Termasuk' : 'Token Mandiri' }}</p>
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none mb-1">Sistem Listrik</p>
+                                    <p class="text-lg font-black text-slate-800 tracking-tight">{{ $room->is_electric_included ? 'Termasuk' : 'Token' }}</p>
+                                    <p class="text-[9px] font-medium text-slate-400 italic">(Mandiri)</p>
                                 </div>
                             </div>
-                            <div class="flex items-center p-4 bg-surface rounded-2xl">
-                                <div class="mr-4 text-2xl">💧</div>
+
+                            <div class="flex items-center gap-4 p-5 bg-white rounded-3xl shadow-lg shadow-slate-100/50 border border-slate-300 group hover:border-blue-400 transition-all duration-300">
+                                <div class="w-12 h-12 bg-blue-50 text-blue-400 rounded-xl flex items-center justify-center text-xl group-hover:bg-blue-400 group-hover:text-white transition-colors duration-300">
+                                    <i class="fas fa-hand-holding-droplet"></i>
+                                </div>
                                 <div>
-                                    <p class="text-xs text-surface0 font-bold uppercase">Air Bersih</p>
-                                    <p class="font-bold text-gray-800">
-                                        {{ $room->is_water_included ? 'Gratis' : 'Bayar Terpisah' }}</p>
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none mb-1">Biaya Air</p>
+                                    <p class="text-lg font-black text-slate-800 tracking-tight">{{ $room->is_water_included ? 'Gratis' : 'Berbayar' }}</p>
+                                    <p class="text-[9px] font-medium text-slate-400 italic">(PDAM)</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
-                        <h3 class="text-xl font-bold text-secondary mb-3">Peraturan Kamar</h3>
-                        <div
-                            class="prose prose-blue text-gray-600 bg-surface pb-6 px-6 rounded-2xl whitespace-pre-line leading-tight italic">
-                            {{ $room->room_rules }}
+                    <div class="bg-white p-10 rounded-[40px] shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-2 h-6 bg-red-500 rounded-full"></div>
+                            <h3 class="text-xl font-extrabold text-slate-800 tracking-tight">Peraturan Kamar</h3>
                         </div>
+
+                        <div class="bg-red-50/50 border border-red-100 p-8 rounded-[30px] relative overflow-hidden">
+                            <i class="fas fa-circle-exclamation absolute -right-4 -bottom-4 text-8xl text-red-500/5"></i>
+                            <div class="prose prose-slate max-w-none">
+                                <p class="text-slate-600 font-bold text-sm leading-relaxed whitespace-pre-line italic">
+                                    {{ $room->room_rules }}
+                                </p>
+                            </div>
+                        </div>
+                        <p class="mt-6 text-[10px] text-slate-400 font-medium flex items-center gap-2">
+                            <i class="fas fa-info-circle"></i> Pelanggaran terhadap peraturan dapat dikenakan sanksi sesuai kebijakan owner.
+                        </p>
                     </div>
                 </div>
 

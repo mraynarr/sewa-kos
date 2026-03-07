@@ -13,7 +13,7 @@ class RoomSeeder extends Seeder
         $types = RoomType::all();
 
         if ($types->isEmpty()) {
-            $this->command->info("Tipe kamar kosong, silakan jalankan RoomTypeSeeder dulu.");
+            $this->command->info("Tipe kamar kosong, jalankan RoomTypeSeeder dulu.");
             return;
         }
 
