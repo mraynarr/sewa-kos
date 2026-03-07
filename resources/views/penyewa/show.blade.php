@@ -1,7 +1,7 @@
     @extends('penyewa.layouts.app')
 
     @section('content')
-        <div class="pt-5 pb-20 px-16 bg-slate-100">
+        <div class="pt-8 pb-20 px-16 bg-slate-100">
 
             <div class="mb-5">
                 <a href="{{ route('home') }}#daftar-kamar" class="text-primary hover:text-slate-950 flex items-center font-bold text-lg group transition-all">
